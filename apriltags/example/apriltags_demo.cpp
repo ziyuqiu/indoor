@@ -161,7 +161,7 @@ public:
     m_tagDetector(NULL),
     m_tagCodes(AprilTags::tagCodes36h11),
 
-    m_draw(true),
+    m_draw(false),
     m_arduino(false),
     m_timing(false),
 
@@ -193,7 +193,7 @@ public:
     } else if (s=="36h11") {
       m_tagCodes = AprilTags::tagCodes36h11;
     } else {
-      cout << "Invalid tag family specified" << endl;
+      //cout << "Invalid tag family specified" << endl;
       exit(1);
     }
   }
@@ -209,8 +209,8 @@ public:
       switch (c) {
       case 'h':
       case '?':
-        cout << intro;
-        cout << usage;
+        //cout << intro;
+        //cout << usage;
         exit(0);
         break;
       case 'a':
@@ -265,8 +265,8 @@ public:
         m_deviceId = atoi(optarg);
         break;
       case ':': // unknown option, from getopt
-        cout << intro;
-        cout << usage;
+        //cout << intro;
+        //cout << usage;
         exit(1);
         break;
       }
@@ -336,16 +336,16 @@ public:
     }
     m_cap.set(CV_CAP_PROP_FRAME_WIDTH, m_width);
     m_cap.set(CV_CAP_PROP_FRAME_HEIGHT, m_height);
-    cout << "Camera successfully opened (ignore error messages above...)" << endl;
-    cout << "Actual resolution: "
-         << m_cap.get(CV_CAP_PROP_FRAME_WIDTH) << "x"
-         << m_cap.get(CV_CAP_PROP_FRAME_HEIGHT) << endl;
+    //cout << "Camera successfully opened (ignore error messages above...)" << endl;
+    //cout << "Actual resolution: "
+    //     << m_cap.get(CV_CAP_PROP_FRAME_WIDTH) << "x"
+    //     << m_cap.get(CV_CAP_PROP_FRAME_HEIGHT) << endl;
 
   }
 
   void print_detection(AprilTags::TagDetection& detection) const {
-    cout << "  Id: " << detection.id
-         << " (Hamming: " << detection.hammingDistance << ")";
+    cout << "  Id: " << detection.id;
+    //     << " (Hamming: " << detection.hammingDistance << ")";
 
     // recovering the relative pose of a tag:
 
@@ -508,7 +508,6 @@ public:
 // here is were everything begins
 int main(int argc, char* argv[]) {
   Demo demo;
-  while(true){
       // process command line options
       demo.parseOptions(argc, argv);
 
@@ -531,6 +530,5 @@ int main(int argc, char* argv[]) {
 
       }
 
-  }
   return 0;
 }
